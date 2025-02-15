@@ -1,0 +1,42 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+
+# IDE - IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IDE - Eclipse
+.settings/
+.classpath
+.project
+
+# IDE - VS Code
+.vscode/
+.code-workspace
+
+# Compiled files
+*.class
+*.jar
+*.war
+
+# Logs
+*.log
+logs/
+test-output/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Selenium
+*.png
+geckodriver.log
+chromedriver.log 
