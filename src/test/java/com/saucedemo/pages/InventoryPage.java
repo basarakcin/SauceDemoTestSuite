@@ -22,8 +22,12 @@ public class InventoryPage extends BasePage {
     private final By productName = By.cssSelector("[data-test='inventory-item-name']");
     private final By productPrice = By.cssSelector("[data-test='inventory-item-price']");
     private final By productDescription = By.cssSelector("[data-test='inventory-item-desc']");
-    private final By activeOption = By.cssSelector("[data-test='active-option']");
-    private final By inventoryContainer = By.cssSelector("[data-test='inventory-container']");
+    // private final By activeOption =
+    // By.cssSelector("[data-test='active-option']");
+    // private final By inventoryContainer =
+    // By.cssSelector("[data-test='inventory-container']");
+    private final By addToCartButtons = By.cssSelector("[data-test^='add-to-cart-']");
+    private final By removeButtons = By.cssSelector("[data-test^='remove-']");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -67,7 +71,6 @@ public class InventoryPage extends BasePage {
             throw new RuntimeException("Failed to sort products: " + e.getMessage());
         }
     }
-
 
     public boolean isSorted(String option) {
         // Wait for items to be present and visible
@@ -229,19 +232,20 @@ public class InventoryPage extends BasePage {
         return null;
     }
 
-    // public void addAllItemsToCart() {
-    // List<WebElement> addToCartButtons = driver.findElements(addToCartButton);
-    // for (WebElement button : addToCartButtons) {
-    // button.click();
-    // }
-    // }
+    public void addAllItemsToCart() {
+        List<WebElement> buttons = driver.findElements(addToCartButtons);
+        for (WebElement button : buttons) {
+            waitForElementToBeClickable(button);
+            button.click();
+        }
+    }
 
-    // public void removeAllItemsFromCart() {
-    // List<WebElement> removeFromCartButtons = driver.findElements(removeButton);
-    // for (WebElement button : removeFromCartButtons) {
-    // button.click();
-    // }
-    // }
+    public void removeAllItemsFromCart() {
+        List<WebElement> removeFromCartButtons = driver.findElements(removeButtons);
+        for (WebElement button : removeFromCartButtons) {
+            button.click();
+        }
+    }
 
     public void goToProductDetailsPage(int productId) {
         List<WebElement> products = driver.findElements(inventoryItems);
@@ -256,5 +260,9 @@ public class InventoryPage extends BasePage {
         }
 
         throw new NoSuchElementException("Could not find product with ID: " + productId);
+    }
+
+    public int getRemoveButtonCount() {
+        return driver.findElements(removeButtons).size();
     }
 }

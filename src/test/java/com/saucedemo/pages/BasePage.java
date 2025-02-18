@@ -82,17 +82,21 @@ public abstract class BasePage {
     protected void waitForElementToBeClickable(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
+
+    protected void waitForElementToBeClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
     
     protected WebElement waitForElement(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     public int getCartItemCount() {
-        try {
-            WebElement badge = waitForElement(this.cartBadge);
-            return Integer.parseInt(badge.getText());
-        } catch (org.openqa.selenium.NoSuchElementException e) {
-            return 0; // Return 0 if badge is not present (cart is empty)
+        if (driver.findElements(cartBadge).isEmpty()) {
+            return 0; 
         }
+        
+        WebElement badge = driver.findElement(cartBadge);
+        return Integer.parseInt(badge.getText());
     }
 } 
