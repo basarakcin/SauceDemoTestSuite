@@ -3,22 +3,22 @@ package com.saucedemo.stepdefinitions;
 import org.openqa.selenium.WebDriver;
 
 import com.saucedemo.config.WebDriverConfig;
+import com.saucedemo.pages.InventoryItemPage;
 import com.saucedemo.pages.InventoryPage;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-
-
 public class ShoppingCartManagementStepDefinitions {
     private final WebDriver driver;
     private final InventoryPage inventoryPage;
-
+    private final InventoryItemPage inventoryItemPage;
 
     public ShoppingCartManagementStepDefinitions() {
         this.driver = WebDriverConfig.getDriver();
         this.inventoryPage = new InventoryPage(driver);
+        this.inventoryItemPage = new InventoryItemPage(driver);
     }
 
     @When("I add all available items to my cart")
@@ -50,5 +50,25 @@ public class ShoppingCartManagementStepDefinitions {
     public void the_cart_count_should_be_0() {
         int cartCount = inventoryPage.getCartItemCount();
         assert cartCount == 0;
+    }
+
+    @When("I open {string}'s page")
+    public void i_open_string_s_page(String productName) {
+        inventoryPage.clickProductByName(productName);
+    }
+
+    @Then("I verify the add to cart button works as expected")
+    public void i_verify_the_add_to_cart_button_works_as_expected() {
+        assert inventoryItemPage.verifyAddToCartButton() : "The add to cart button does not work as expected";
+    }
+
+    @And("I verify the remove from cart button works as expected")
+    public void i_verify_the_remove_from_cart_button_works_as_expected() {
+        assert inventoryItemPage.verifyRemoveFromCartButton() : "The remove from cart button does not work as expected";
+    }
+
+    @And("I click the back to products button")
+    public void i_click_the_back_to_products_button() {
+        inventoryItemPage.clickBackToProductsButton();
     }
 }

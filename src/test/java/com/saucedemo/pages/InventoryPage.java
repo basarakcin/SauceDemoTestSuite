@@ -26,8 +26,9 @@ public class InventoryPage extends BasePage {
     // By.cssSelector("[data-test='active-option']");
     // private final By inventoryContainer =
     // By.cssSelector("[data-test='inventory-container']");
-    private final By addToCartButtons = By.cssSelector("[data-test^='add-to-cart-']");
-    private final By removeButtons = By.cssSelector("[data-test^='remove-']");
+    protected static final By addToCartButtons = By.cssSelector("[data-test^='add-to-cart']");
+    protected static final By removeButtons = By.cssSelector("[data-test^='remove']");
+    private final By productTitleLinks = By.cssSelector("[data-test^='item-'][data-test$='-title-link']");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -169,7 +170,7 @@ public class InventoryPage extends BasePage {
         }
     }
 
-    public void backToProducts() {
+    public void clickBackToProductsButton() {
         waitForElement(backToProductsButton).click();
     }
 
@@ -264,5 +265,17 @@ public class InventoryPage extends BasePage {
 
     public int getRemoveButtonCount() {
         return driver.findElements(removeButtons).size();
+    }
+
+    public boolean verifyAddToCartButton() {
+        addAllItemsToCart();
+        int cartCount = getCartItemCount();
+        return cartCount == 1;
+    }
+
+    public boolean verifyRemoveFromCartButton() {
+        removeAllItemsFromCart();
+        int cartCount = getCartItemCount();
+        return cartCount == 0;
     }
 }
