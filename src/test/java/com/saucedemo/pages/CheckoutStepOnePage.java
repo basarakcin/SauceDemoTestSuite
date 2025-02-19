@@ -7,11 +7,11 @@ import com.saucedemo.constants.URLs;
 
 public class CheckoutStepOnePage extends BasePage {
 
-    private final By firstNameInput = By.id("first-name");
-    private final By lastNameInput = By.id("last-name");
-    private final By postalCodeInput = By.id("postal-code");
-    private final By continueButton = By.id("continue");
-    private final By cancelButton = By.id("cancel");
+    private final By firstNameInput = By.cssSelector("[data-test='firstName']");
+    private final By lastNameInput = By.cssSelector("[data-test='lastName']");
+    private final By postalCodeInput = By.cssSelector("[data-test='postalCode']");
+    private final By continueButton = By.cssSelector("[data-test='continue']");
+    private final By cancelButton = By.cssSelector("[data-test='cancel']");
     private final By errorMessage = By.cssSelector("[data-test='error']");
     
     public CheckoutStepOnePage(WebDriver driver) {
@@ -46,7 +46,6 @@ public class CheckoutStepOnePage extends BasePage {
         enterFirstName(firstName);
         enterLastName(lastName);
         enterPostalCode(postalCode);
-        clickContinue();
     }
     
     public String getErrorMessage() {

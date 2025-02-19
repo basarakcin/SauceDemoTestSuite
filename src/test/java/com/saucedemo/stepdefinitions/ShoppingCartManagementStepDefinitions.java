@@ -92,13 +92,5 @@ public class ShoppingCartManagementStepDefinitions {
             String.format("Expected %d items in cart but found %d", cartBadgeCount, cartCount);
     }
     
-    @And("I press the Checkout button")
-    public void i_press_the_checkout_button() {
-        cartPage.clickCheckout();
-    }
 
-    @Then("I should see the checkout step one page")
-    public void i_should_see_the_checkout_step_one_page() {
-        assert checkoutStepOnePage.isOnCheckoutStepOne() : "I should see the checkout step one page";
-    }
 }
