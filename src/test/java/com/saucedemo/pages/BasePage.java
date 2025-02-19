@@ -27,9 +27,9 @@ public abstract class BasePage {
     protected final By menuResetAppState = By.cssSelector("[data-test='reset-sidebar-link']");
 
     // Footer elements
-    protected final By twitterLink = By.cssSelector("[data-test='twitter-social-link']");
-    protected final By facebookLink = By.cssSelector("[data-test='facebook-social-link']");
-    protected final By linkedinLink = By.cssSelector("[data-test='linkedin-social-link']");
+    protected final By twitterLink = By.cssSelector("[data-test='social-twitter']");
+    protected final By facebookLink = By.cssSelector("[data-test='social-facebook']");
+    protected final By linkedinLink = By.cssSelector("[data-test='social-linkedin']");
     protected final By footerCopy = By.cssSelector("[data-test='footer-copy']");
 
 

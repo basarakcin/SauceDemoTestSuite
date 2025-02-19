@@ -10,4 +10,9 @@ public class URLs {
     public static final String CHECKOUT_COMPLETE_URL = BASE_URL + "/checkout-complete.html";
 
     public static final String ABOUT_URL = "https://saucelabs.com/";
+
+    public static final String EXPECTED_TWITTER_URL = "https://twitter.com/saucelabs";
+    public static final String EXPECTED_FACEBOOK_URL = "https://www.facebook.com/saucelabs";
+    public static final String EXPECTED_LINKEDIN_URL = "https://www.linkedin.com/company/sauce-labs/";
+    public static final String EXPECTED_COPYRIGHT = "© 2025 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy";
 }
