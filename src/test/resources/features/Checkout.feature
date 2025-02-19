@@ -1,8 +1,10 @@
+@regression
 Feature: Checkout
 
   Background:
     Given I am on the login page
 
+  @smoke
   Scenario Outline: Checkout process
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
@@ -80,6 +82,7 @@ Feature: Checkout
       | error_user              | secret_sauce   | Basar      | Akcin     |       81925 |
       | visual_user             | secret_sauce   | Basar      | Akcin     |       81925 |
   
+  @smoke
   Scenario Outline: Finish the checkout process
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page

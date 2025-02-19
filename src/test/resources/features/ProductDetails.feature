@@ -1,3 +1,4 @@
+@regression
 Feature: Product Details
   As a user
   I want to view product details correctly

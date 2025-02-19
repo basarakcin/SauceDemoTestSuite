@@ -1,3 +1,4 @@
+@regression
 Feature: Menu Navigation
   As a user
   I want to use the menu options
@@ -6,6 +7,7 @@ Feature: Menu Navigation
   Background:
     Given I am on the login page
 
+  @smoke
   Scenario Outline: Access all items from menu
     When I login with "<username>" and "<password>"
     And I click the menu button
@@ -20,6 +22,7 @@ Feature: Menu Navigation
       | error_user              | secret_sauce |
       | visual_user             | secret_sauce |
 
+  @smoke
   Scenario Outline: Logout through menu
     When I login with "<username>" and "<password>"
     And I click the menu button

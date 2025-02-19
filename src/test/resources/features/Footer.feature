@@ -1,3 +1,4 @@
+@regression
 Feature: Footer
   As a user
   I want to see and use the footer elements

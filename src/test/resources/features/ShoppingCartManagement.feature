@@ -1,3 +1,4 @@
+@regression
 Feature: Shopping Cart Management
   As a user
   I want to add and remove items from my cart
@@ -6,6 +7,7 @@ Feature: Shopping Cart Management
   Background:
     Given I am on the login page
 
+  @smoke
   Scenario Outline: Add and then remove all items from inventory page
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page

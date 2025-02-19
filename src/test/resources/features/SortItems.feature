@@ -1,3 +1,4 @@
+@regression
 Feature: Sort Items
   As a user
   I want to sort items in the inventory

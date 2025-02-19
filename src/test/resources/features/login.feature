@@ -1,8 +1,10 @@
+@regression
 Feature: Login Functionality
 
   Background:
     Given I am on the login page
 
+  @smoke
   Scenario: Login with valid credentials
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
@@ -16,6 +18,7 @@ Feature: Login Functionality
       | error_user              | secret_sauce   |
       | visual_user             | secret_sauce   |
 
+  @smoke
   Scenario: Login as locked out user
     When I login with "<LOCKED_OUT_USER>" and "<VALID_PASSWORD>"
     Then I should see an error message indicating locked out user
@@ -24,6 +27,7 @@ Feature: Login Functionality
       | LOCKED_OUT_USER | VALID_PASSWORD |
       | locked_out_user | secret_sauce   |
 
+  @smoke
   Scenario: Login with invalid credentials
     When I login with "<INVALID_USERNAME>" and "<INVALID_PASSWORD>"
     Then I should see an error message indicating invalid credentials
@@ -33,6 +37,7 @@ Feature: Login Functionality
       | standard_user    | basar_akcin      |
       | basar_akcin      | secret_sauce     |
 
+  @smoke
   Scenario: Login with empty username
     When I login with "<EMPTY_USERNAME>" and "<INVALID_PASSWORD>"
     Then I should see an error message indicating required field
