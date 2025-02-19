@@ -83,7 +83,7 @@ Feature: Shopping Cart Management
       | error_user              | secret_sauce   |
       | visual_user             | secret_sauce   |
 
- Scenario Outline: Add and then remove all items from cart page
+ Scenario Outline: Go to checkout step one page
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
     When I add all available items to my cart
