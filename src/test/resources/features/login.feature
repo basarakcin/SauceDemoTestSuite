@@ -8,6 +8,7 @@ Feature: Login Functionality
   Scenario: Login with valid credentials
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
+    And the average response time should be less than 1 second
     And there should not be any visual failures
 
     Examples:

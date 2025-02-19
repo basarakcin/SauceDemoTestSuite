@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.saucedemo.constants.Products;
 import com.saucedemo.constants.URLs;
+import com.saucedemo.runners.PerformanceTestRunner;
 
 public class InventoryPage extends BasePage {
 
@@ -32,6 +33,7 @@ public class InventoryPage extends BasePage {
 
     public void sortProducts(String option) {
         try {
+            PerformanceTestRunner.startTimer();
             WebElement sortDropdown = waitForElement(productSort);
             Select select = new Select(sortDropdown);
             String value;
@@ -61,12 +63,15 @@ public class InventoryPage extends BasePage {
             } catch (org.openqa.selenium.NoAlertPresentException e) {
                 waitForElementToBeVisible(productName);
             }
+            PerformanceTestRunner.stopTimer();
         } catch (Exception e) {
+            PerformanceTestRunner.stopTimer();
             throw new RuntimeException("Failed to sort products: " + e.getMessage());
         }
     }
 
     public boolean isSorted(String option) {
+        PerformanceTestRunner.startTimer();
         waitForElementToBeClickable(productSort);
 
         List<WebElement> products = driver.findElements(inventoryItems);
@@ -112,7 +117,7 @@ public class InventoryPage extends BasePage {
                 result = isSortedNumerically(prices, false);
                 break;
         }
-
+        PerformanceTestRunner.stopTimer();
         return result;
     }
 

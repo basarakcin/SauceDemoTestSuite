@@ -11,6 +11,8 @@ Feature: Sort Items
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
     And the items should be able to be sorted correctly
+    And the average response time should be less than 1 second
+    
 
     Examples:
       | VALID_USERNAME          | VALID_PASSWORD |

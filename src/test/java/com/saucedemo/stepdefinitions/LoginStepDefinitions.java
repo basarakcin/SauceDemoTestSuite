@@ -1,15 +1,18 @@
 package com.saucedemo.stepdefinitions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.openqa.selenium.WebDriver;
 
 import com.saucedemo.config.WebDriverConfig;
 import com.saucedemo.pages.InventoryPage;
 import com.saucedemo.pages.LoginPage;
+import com.saucedemo.runners.PerformanceTestRunner;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 public class LoginStepDefinitions {
     private final WebDriver driver;
     private final LoginPage loginPage;
@@ -24,6 +27,7 @@ public class LoginStepDefinitions {
 
     @Given("I am on the login page")
     public void iAmOnTheLoginPage() {
+        PerformanceTestRunner.resetTimer(); 
         loginPage.navigateTo();
         assert loginPage.isOnLoginPage() : "Not on login page";
     }
@@ -56,6 +60,13 @@ public class LoginStepDefinitions {
     @And("there should not be any visual failures")
     public void thereShouldNotBeAnyVisualFailures() {
         assert !inventoryPage.hasVisualFailures() : "Visual failures detected";
+    }
+
+    @And("the average response time should be less than {int} second")
+    public void validateAverageResponseTime(int maxTimeInSeconds) {
+        double averageResponseTime = PerformanceTestRunner.getAverageResponseTime();
+        assertTrue(averageResponseTime < maxTimeInSeconds,
+                "Average response time exceeded the limit: " + averageResponseTime + " seconds");
     }
 
     @io.cucumber.java.After

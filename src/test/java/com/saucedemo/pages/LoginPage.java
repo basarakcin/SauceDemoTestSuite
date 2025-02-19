@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.saucedemo.constants.ErrorMessages;
 import com.saucedemo.constants.URLs;
+import com.saucedemo.runners.PerformanceTestRunner;
 
 public class LoginPage extends BasePage {
 
@@ -40,7 +41,9 @@ public class LoginPage extends BasePage {
     }
     
     public void clickLoginButton() {
+        PerformanceTestRunner.startTimer();
         wait.until(ExpectedConditions.elementToBeClickable(loginButton)).click();
+        PerformanceTestRunner.stopTimer();
     }
     
     public void login(String username, String password) {

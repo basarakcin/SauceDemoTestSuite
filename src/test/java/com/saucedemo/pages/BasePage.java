@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.saucedemo.constants.URLs;
+import com.saucedemo.runners.PerformanceTestRunner;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -91,19 +92,28 @@ public abstract class BasePage {
     
     
     protected void waitForElementToBeClickable(By locator) {
+        PerformanceTestRunner.startTimer();
         wait.until(ExpectedConditions.elementToBeClickable(locator));
+        PerformanceTestRunner.stopTimer();
     }
 
     protected void waitForElementToBeClickable(WebElement element) {
+        PerformanceTestRunner.startTimer();
         wait.until(ExpectedConditions.elementToBeClickable(element));
+        PerformanceTestRunner.stopTimer();
     }
     
     protected void waitForElementToBeClickableAndClick(By locator) {
+        PerformanceTestRunner.startTimer();
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+        PerformanceTestRunner.stopTimer();
     }
 
     protected WebElement waitForElement(By locator) {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        PerformanceTestRunner.startTimer();
+        WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+        PerformanceTestRunner.stopTimer();
+        return element;
     }
 
     public int getCartItemCount() {

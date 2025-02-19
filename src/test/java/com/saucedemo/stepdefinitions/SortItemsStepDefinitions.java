@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.saucedemo.config.WebDriverConfig;
 import com.saucedemo.pages.InventoryPage;
+import com.saucedemo.runners.PerformanceTestRunner;
 
 import io.cucumber.java.en.And;
 
@@ -22,8 +23,10 @@ public class SortItemsStepDefinitions {
     public void the_items_should_be_able_to_be_sorted_correctly() {
         StringBuilder errorMessage = new StringBuilder();
         boolean allSortsPassed = true;
+        
 
         for (String option : sortOptions) {
+            PerformanceTestRunner.resetTimer();
             inventoryPage.sortProducts(option);
             boolean isSorted = inventoryPage.isSorted(option);
             if (!isSorted) {
