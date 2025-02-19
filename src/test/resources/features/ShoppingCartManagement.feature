@@ -6,7 +6,7 @@ Feature: Shopping Cart Management
   Background:
     Given I am on the login page
 
-  Scenario Outline: Add and then remove all items from the cart
+  Scenario Outline: Add and then remove all items from inventory page
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
     When I add all available items to my cart
@@ -66,5 +66,35 @@ Feature: Shopping Cart Management
       | visual_user   | secret_sauce   | Sauce Labs Onesie |
       | visual_user   | secret_sauce   | Test.allTheThings() T-Shirt (Red) |
 
+ Scenario Outline: Add and then remove all items from cart page
+    When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
+    Then I should see the inventory page
+    When I add all available items to my cart
+    And I go to the cart page
+    Then I should have the same number of items in my cart as the cart badge
+    When I remove all items from my cart
+    Then the cart count should be 0
 
+    Examples:
+      | VALID_USERNAME          | VALID_PASSWORD |
+      | standard_user           | secret_sauce   |
+      | problem_user            | secret_sauce   |
+      | performance_glitch_user | secret_sauce   |
+      | error_user              | secret_sauce   |
+      | visual_user             | secret_sauce   |
 
+ Scenario Outline: Add and then remove all items from cart page
+    When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
+    Then I should see the inventory page
+    When I add all available items to my cart
+    And I go to the cart page
+    And I press the Checkout button
+    Then I should see the checkout step one page
+
+        Examples:
+      | VALID_USERNAME          | VALID_PASSWORD |
+      | standard_user           | secret_sauce   |
+      | problem_user            | secret_sauce   |
+      | performance_glitch_user | secret_sauce   |
+      | error_user              | secret_sauce   |
+      | visual_user             | secret_sauce   |

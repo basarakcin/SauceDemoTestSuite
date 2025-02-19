@@ -22,13 +22,9 @@ public class InventoryPage extends BasePage {
     private final By productName = By.cssSelector("[data-test='inventory-item-name']");
     private final By productPrice = By.cssSelector("[data-test='inventory-item-price']");
     private final By productDescription = By.cssSelector("[data-test='inventory-item-desc']");
-    // private final By activeOption =
-    // By.cssSelector("[data-test='active-option']");
-    // private final By inventoryContainer =
-    // By.cssSelector("[data-test='inventory-container']");
+
     protected static final By addToCartButtons = By.cssSelector("[data-test^='add-to-cart']");
     protected static final By removeButtons = By.cssSelector("[data-test^='remove']");
-    private final By productTitleLinks = By.cssSelector("[data-test^='item-'][data-test$='-title-link']");
 
     public InventoryPage(WebDriver driver) {
         super(driver);
@@ -56,16 +52,13 @@ public class InventoryPage extends BasePage {
                     throw new IllegalArgumentException("Invalid sort option: " + option);
             }
 
-            // Wait for dropdown to be clickable before selecting
             waitForElementToBeClickable(productSort);
             select.selectByValue(value);
 
-            // Handle potential alert
             try {
                 driver.switchTo().alert().accept();
                 throw new RuntimeException("Sorting is broken for this user");
             } catch (org.openqa.selenium.NoAlertPresentException e) {
-                // No alert present, continue normally
                 waitForElementToBeVisible(productName);
             }
         } catch (Exception e) {
@@ -74,7 +67,6 @@ public class InventoryPage extends BasePage {
     }
 
     public boolean isSorted(String option) {
-        // Wait for items to be present and visible
         waitForElementToBeClickable(productSort);
 
         List<WebElement> products = driver.findElements(inventoryItems);

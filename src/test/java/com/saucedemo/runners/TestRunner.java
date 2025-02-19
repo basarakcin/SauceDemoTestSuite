@@ -10,8 +10,8 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("features")
-// @SelectClasspathResource("features/MenuNavigation.feature")
+// @SelectClasspathResource("features")
+@SelectClasspathResource("features/ShoppingCartManagement.feature")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "com.saucedemo.stepdefinitions")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, html:target/cucumber-reports/Cucumber.html")
 public class TestRunner {

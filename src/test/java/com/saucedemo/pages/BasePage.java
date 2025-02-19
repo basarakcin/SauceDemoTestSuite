@@ -64,6 +64,7 @@ public abstract class BasePage {
 
     public void clickCartIcon() {
         wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
+        isOnPage(URLs.CART_URL);
     }
     
     

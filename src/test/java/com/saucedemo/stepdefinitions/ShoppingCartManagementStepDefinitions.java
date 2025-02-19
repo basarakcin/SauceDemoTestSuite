@@ -3,6 +3,8 @@ package com.saucedemo.stepdefinitions;
 import org.openqa.selenium.WebDriver;
 
 import com.saucedemo.config.WebDriverConfig;
+import com.saucedemo.pages.CartPage;
+import com.saucedemo.pages.CheckoutStepOnePage;
 import com.saucedemo.pages.InventoryItemPage;
 import com.saucedemo.pages.InventoryPage;
 
@@ -14,11 +16,15 @@ public class ShoppingCartManagementStepDefinitions {
     private final WebDriver driver;
     private final InventoryPage inventoryPage;
     private final InventoryItemPage inventoryItemPage;
+    private final CartPage cartPage;
+    private final CheckoutStepOnePage checkoutStepOnePage;
 
     public ShoppingCartManagementStepDefinitions() {
         this.driver = WebDriverConfig.getDriver();
         this.inventoryPage = new InventoryPage(driver);
         this.inventoryItemPage = new InventoryItemPage(driver);
+        this.cartPage = new CartPage(driver);
+        this.checkoutStepOnePage = new CheckoutStepOnePage(driver);
     }
 
     @When("I add all available items to my cart")
@@ -70,5 +76,29 @@ public class ShoppingCartManagementStepDefinitions {
     @And("I click the back to products button")
     public void i_click_the_back_to_products_button() {
         inventoryItemPage.clickBackToProductsButton();
+    }
+
+    @And("I go to the cart page")
+    public void i_go_to_the_cart_page() {
+        inventoryPage.clickCartIcon();
+  
+    }
+
+    @Then("I should have the same number of items in my cart as the cart badge")
+    public void i_should_have_the_same_number_of_items_in_my_cart_as_the_cart_badge() {
+        int cartCount = inventoryPage.getCartItemCount();
+        int cartBadgeCount = inventoryPage.getCartItemCount();
+        assert cartCount == cartBadgeCount : 
+            String.format("Expected %d items in cart but found %d", cartBadgeCount, cartCount);
+    }
+    
+    @And("I press the Checkout button")
+    public void i_press_the_checkout_button() {
+        cartPage.clickCheckout();
+    }
+
+    @Then("I should see the checkout step one page")
+    public void i_should_see_the_checkout_step_one_page() {
+        assert checkoutStepOnePage.isOnCheckoutStepOne() : "I should see the checkout step one page";
     }
 }
