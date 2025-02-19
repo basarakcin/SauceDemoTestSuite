@@ -26,16 +26,16 @@ public class LoginPage extends BasePage {
     public void navigateTo() {
         driver.get(URLs.BASE_URL);
     }
-    
+
     public void enterUsername(String username) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(usernameInput));
-        element.clear();  // Clear any existing text
+        element.clear();  
         element.sendKeys(username);
     }
     
     public void enterPassword(String password) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(passwordInput));
-        element.clear();  // Clear any existing text
+        element.clear(); 
         element.sendKeys(password);
     }
     

@@ -8,4 +8,6 @@ public class URLs {
     public static final String CHECKOUT_STEP_ONE_URL = BASE_URL + "/checkout-step-one.html";
     public static final String CHECKOUT_STEP_TWO_URL = BASE_URL + "/checkout-step-two.html";
     public static final String CHECKOUT_COMPLETE_URL = BASE_URL + "/checkout-complete.html";
+
+    public static final String ABOUT_URL = "https://saucelabs.com/";
 }

@@ -8,12 +8,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.saucedemo.constants.URLs;
+
 public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     
     // Header elements
-    protected final By menuButton = By.cssSelector("[data-test='open-menu']");
+    protected final By menuButton = By.id("react-burger-menu-btn");
     protected final By cartIcon = By.cssSelector("[data-test='shopping-cart-link']");
     protected final By cartBadge = By.cssSelector("[data-test='shopping-cart-badge']");
 
@@ -38,36 +40,41 @@ public abstract class BasePage {
     
     public void clickMenuButton() {
         wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        
     }
-    
+
+    public void clickMenuOption(String option) {
+        switch (option) {
+            case "All Items":
+                waitForElementToBeClickableAndClick(menuAllItems);
+                break;
+            case "About":
+                waitForElementToBeClickableAndClick(menuAbout);
+                break;
+            case "Logout":
+                waitForElementToBeClickableAndClick(menuLogout);
+                break;
+            case "Reset App State":
+                waitForElementToBeClickableAndClick(menuResetAppState);
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid menu option: " + option);
+        }
+    }
+
     public void clickCartIcon() {
         wait.until(ExpectedConditions.elementToBeClickable(cartIcon)).click();
     }
     
-    public void logout() {
-        clickMenuButton();
-        wait.until(ExpectedConditions.elementToBeClickable(menuLogout)).click();
-    }
-    
-    public void resetAppState() {
-        clickMenuButton();
-        wait.until(ExpectedConditions.elementToBeClickable(menuResetAppState)).click();
-    }
-    
-    public void navigateToAllItems() {
-        clickMenuButton();
-        wait.until(ExpectedConditions.elementToBeClickable(menuAllItems)).click();
-    }
-    
-    public void navigateToAbout() {
-        clickMenuButton();
-        wait.until(ExpectedConditions.elementToBeClickable(menuAbout)).click();
-    }
     
     public boolean isOnPage(String expectedUrl) {
         String currentUrl = driver.getCurrentUrl().replaceAll("/$", "");
         expectedUrl = expectedUrl.replaceAll("/$", "");
         return currentUrl.equals(expectedUrl);
+    }
+
+    public boolean isOnAboutPage() {
+        return isOnPage(URLs.ABOUT_URL);
     }
     
     public boolean hasNoVisualErrors() {
@@ -79,6 +86,7 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
     
+    
     protected void waitForElementToBeClickable(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
@@ -87,6 +95,10 @@ public abstract class BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
     
+    protected void waitForElementToBeClickableAndClick(By locator) {
+        wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
+    }
+
     protected WebElement waitForElement(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
