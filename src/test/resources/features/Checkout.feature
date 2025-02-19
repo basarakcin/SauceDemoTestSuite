@@ -6,10 +6,12 @@ Feature: Checkout
   Scenario Outline: Checkout process
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
+
     When I add all available items to my cart
     And I go to the cart page
     And I press the Checkout button
     Then I should see the checkout step one page
+
     When I fill the checkout info with "<FIRST_NAME>" and "<LAST_NAME>" and "<POSTAL_CODE>"
     And I press the Continue button
     Then I should see the checkout step two page
@@ -32,13 +34,15 @@ Feature: Checkout
       | visual_user             | secret_sauce   |            | Akcin     |       81925 |
       | visual_user             | secret_sauce   | Basar      | Akcin     |             |
 
-  Scenario Outline: Checkout process cancel
+  Scenario Outline: Checkout process cancel at step one
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
+
     When I add all available items to my cart
     And I go to the cart page
     And I press the Checkout button
     Then I should see the checkout step one page
+
     When I press the Cancel button
     Then I should see the cart page
 
@@ -48,3 +52,28 @@ Feature: Checkout
       | problem_user            | secret_sauce   |
       | performance_glitch_user | secret_sauce   |
       | error_user              | secret_sauce   |
+
+    Scenario Outline: Checkout process cancel at step two
+    When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
+    Then I should see the inventory page
+
+    When I add all available items to my cart
+    And I go to the cart page
+    And I press the Checkout button
+    Then I should see the checkout step one page
+
+    When I fill the checkout info with "<FIRST_NAME>" and "<LAST_NAME>" and "<POSTAL_CODE>"
+    And I press the Continue button
+    Then I should see the checkout step two page
+
+    When I press the Cancel button
+    Then I should see the inventory page
+
+    Examples:
+      | VALID_USERNAME          | VALID_PASSWORD | FIRST_NAME | LAST_NAME | POSTAL_CODE |
+      | standard_user           | secret_sauce   | Basar      | Akcin     |       81925 |
+      | problem_user            | secret_sauce   | Basar      | Akcin     |       81925 |
+      | performance_glitch_user | secret_sauce   | Basar      | Akcin     |       81925 |
+      | error_user              | secret_sauce   | Basar      | Akcin     |       81925 |
+      | visual_user             | secret_sauce   | Basar      | Akcin     |       81925 |
+  
