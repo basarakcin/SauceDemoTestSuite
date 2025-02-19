@@ -9,6 +9,7 @@ Feature: Shopping Cart Management
   Scenario Outline: Add and then remove all items from inventory page
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
+    And there should not be any visual failures
     When I add all available items to my cart
     Then the cart count should equal the total number of items
     And I should see remove buttons for each item
@@ -72,6 +73,7 @@ Feature: Shopping Cart Management
     When I add all available items to my cart
     And I go to the cart page
     Then I should have the same number of items in my cart as the cart badge
+    And there should not be any visual failures
     When I remove all items from my cart
     Then the cart count should be 0
 

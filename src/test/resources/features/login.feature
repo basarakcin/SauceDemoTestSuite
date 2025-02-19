@@ -6,6 +6,7 @@ Feature: Login Functionality
   Scenario: Login with valid credentials
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
+    And there should not be any visual failures
 
     Examples:
       | VALID_USERNAME          | VALID_PASSWORD |

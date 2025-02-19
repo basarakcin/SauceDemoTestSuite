@@ -270,4 +270,5 @@ public class InventoryPage extends BasePage {
         int cartCount = getCartItemCount();
         return cartCount == 0;
     }
+
 }

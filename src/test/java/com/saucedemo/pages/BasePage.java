@@ -32,6 +32,8 @@ public abstract class BasePage {
     protected final By linkedinLink = By.cssSelector("[data-test='social-linkedin']");
     protected final By footerCopy = By.cssSelector("[data-test='footer-copy']");
 
+    protected final By visualFailure = By.cssSelector("[class*='visual_failure']");
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -111,5 +113,9 @@ public abstract class BasePage {
         
         WebElement badge = driver.findElement(cartBadge);
         return Integer.parseInt(badge.getText());
+    }
+
+    public boolean hasVisualFailures() {
+        return !driver.findElements(visualFailure).isEmpty();
     }
 } 

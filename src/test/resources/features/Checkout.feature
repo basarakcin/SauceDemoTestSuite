@@ -15,6 +15,7 @@ Feature: Checkout
     When I fill the checkout info with "<FIRST_NAME>" and "<LAST_NAME>" and "<POSTAL_CODE>"
     And I press the Continue button
     Then I should see the checkout step two page
+    And there should not be any visual failures
 
     Examples:
       | VALID_USERNAME          | VALID_PASSWORD | FIRST_NAME | LAST_NAME | POSTAL_CODE |
@@ -42,6 +43,7 @@ Feature: Checkout
     And I go to the cart page
     And I press the Checkout button
     Then I should see the checkout step one page
+    And there should not be any visual failures
 
     When I press the Cancel button
     Then I should see the cart page
@@ -52,6 +54,7 @@ Feature: Checkout
       | problem_user            | secret_sauce   |
       | performance_glitch_user | secret_sauce   |
       | error_user              | secret_sauce   |
+       | visual_user             | secret_sauce   |
 
     Scenario Outline: Checkout process cancel at step two
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
@@ -94,6 +97,7 @@ Feature: Checkout
 
     When I press the Finish button
     Then I should see the checkout complete page
+    And there should not be any visual failures
 
     Examples:
       | VALID_USERNAME          | VALID_PASSWORD | FIRST_NAME | LAST_NAME | POSTAL_CODE |

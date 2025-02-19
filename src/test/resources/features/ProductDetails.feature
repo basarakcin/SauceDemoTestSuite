@@ -9,6 +9,7 @@ Feature: Product Details
   Scenario Outline: Verify all product details
     When I login with "<VALID_USERNAME>" and "<VALID_PASSWORD>"
     Then I should see the inventory page
+    And there should not be any visual failures
     And all product details should be displayed correctly
 
     Examples:

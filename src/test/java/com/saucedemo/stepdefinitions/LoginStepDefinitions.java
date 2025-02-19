@@ -6,10 +6,10 @@ import com.saucedemo.config.WebDriverConfig;
 import com.saucedemo.pages.InventoryPage;
 import com.saucedemo.pages.LoginPage;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
 public class LoginStepDefinitions {
     private final WebDriver driver;
     private final LoginPage loginPage;
@@ -51,6 +51,11 @@ public class LoginStepDefinitions {
     @Then("I should see an error message indicating required field")
     public void iShouldSeeRequiredFieldError() {
         assert loginPage.hasRequiredFieldError() : "Required field error not displayed";
+    }
+
+    @And("there should not be any visual failures")
+    public void thereShouldNotBeAnyVisualFailures() {
+        assert !inventoryPage.hasVisualFailures() : "Visual failures detected";
     }
 
     @io.cucumber.java.After

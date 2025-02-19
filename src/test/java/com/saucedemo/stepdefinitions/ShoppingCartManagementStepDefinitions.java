@@ -3,8 +3,6 @@ package com.saucedemo.stepdefinitions;
 import org.openqa.selenium.WebDriver;
 
 import com.saucedemo.config.WebDriverConfig;
-import com.saucedemo.pages.CartPage;
-import com.saucedemo.pages.CheckoutStepOnePage;
 import com.saucedemo.pages.InventoryItemPage;
 import com.saucedemo.pages.InventoryPage;
 
@@ -16,15 +14,15 @@ public class ShoppingCartManagementStepDefinitions {
     private final WebDriver driver;
     private final InventoryPage inventoryPage;
     private final InventoryItemPage inventoryItemPage;
-    private final CartPage cartPage;
-    private final CheckoutStepOnePage checkoutStepOnePage;
+    // private final CartPage cartPage;
+    // private final CheckoutStepOnePage checkoutStepOnePage;
 
     public ShoppingCartManagementStepDefinitions() {
         this.driver = WebDriverConfig.getDriver();
         this.inventoryPage = new InventoryPage(driver);
         this.inventoryItemPage = new InventoryItemPage(driver);
-        this.cartPage = new CartPage(driver);
-        this.checkoutStepOnePage = new CheckoutStepOnePage(driver);
+        // this.cartPage = new CartPage(driver);
+        // this.checkoutStepOnePage = new CheckoutStepOnePage(driver);
     }
 
     @When("I add all available items to my cart")
