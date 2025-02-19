@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.saucedemo.config.WebDriverConfig;
 import com.saucedemo.constants.ErrorMessages;
 import com.saucedemo.pages.CartPage;
+import com.saucedemo.pages.CheckoutCompletePage;
 import com.saucedemo.pages.CheckoutStepOnePage;
 import com.saucedemo.pages.CheckoutStepTwoPage;
 import com.saucedemo.pages.InventoryItemPage;
@@ -22,7 +23,7 @@ public class CheckoutStepDefinitions {
     private final InventoryItemPage inventoryItemPage;
     private final CartPage cartPage;
     private final CheckoutStepTwoPage checkoutStepTwoPage;
-
+    private final CheckoutCompletePage checkoutCompletePage;
 
     public CheckoutStepDefinitions() {
         this.driver = WebDriverConfig.getDriver();
@@ -31,6 +32,7 @@ public class CheckoutStepDefinitions {
         this.cartPage = new CartPage(driver);
         this.checkoutStepOnePage = new CheckoutStepOnePage(driver);
         this.checkoutStepTwoPage = new CheckoutStepTwoPage(driver);
+        this.checkoutCompletePage = new CheckoutCompletePage(driver);
     }
 
     @And("I press the Checkout button")
@@ -81,5 +83,26 @@ public class CheckoutStepDefinitions {
     public void i_should_see_the_cart_page() {
         assert cartPage.isOnCartPage() : "I should see the cart page";
     }
+    
+    @And("I should see have the same number of items in my cart as the cart badge")
+    public void i_should_see_have_the_same_number_of_items_in_my_cart_as_the_cart_badge() {
+        assert checkoutStepTwoPage.getNumberOfItemsInCart() == checkoutStepTwoPage.getCartItemCount() : "I should see have the same number of items in my cart as the cart badge";
+    }
+
+    @And("the total price of the items should be displayed correctly")
+    public void the_total_price_of_the_items_should_be_displayed_correctly() {
+        assert checkoutStepTwoPage.verifyTotalCalculation() : "The total price of the items should be displayed correctly";
+    }
+
+    @And("I press the Finish button")
+    public void i_press_the_finish_button() {
+        checkoutStepTwoPage.clickFinish();
+    }
+
+    @Then("I should see the checkout complete page")
+    public void i_should_see_the_checkout_complete_page() {
+        assert checkoutCompletePage.isOnCheckoutComplete() : "I should see the checkout complete page";
+    }
+
     
 }

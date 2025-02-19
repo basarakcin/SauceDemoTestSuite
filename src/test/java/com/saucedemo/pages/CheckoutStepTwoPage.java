@@ -1,5 +1,7 @@
 package com.saucedemo.pages;
 
+import java.math.BigDecimal;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -7,14 +9,14 @@ import com.saucedemo.constants.URLs;
 
 public class CheckoutStepTwoPage extends BasePage {
 
-    private final By finishButton = By.id("finish");
-    private final By cancelButton = By.id("cancel");
-    private final By subtotalLabel = By.className("summary_subtotal_label");
-    private final By taxLabel = By.className("summary_tax_label");
-    private final By totalLabel = By.className("summary_total_label");
-    private final By itemTotal = By.cssSelector(".summary_subtotal_label");
-    private final By tax = By.cssSelector(".summary_tax_label");
-    private final By total = By.cssSelector(".summary_total_label");
+    private final By finishButton = By.cssSelector("[data-test='finish']");
+    private final By cancelButton = By.cssSelector("[data-test='cancel']");
+   
+    private final By itemTotal = By.cssSelector("[data-test='subtotal-label']");
+    private final By tax = By.cssSelector("[data-test='tax-label']");
+    private final By total = By.cssSelector("[data-test='total-label']");
+    
+    private final By cartItems = By.cssSelector("[data-test='inventory-item']");
     
     public CheckoutStepTwoPage(WebDriver driver) {
         super(driver);
@@ -22,6 +24,10 @@ public class CheckoutStepTwoPage extends BasePage {
     
     public boolean isOnCheckoutStepTwo() {
         return isOnPage(URLs.CHECKOUT_STEP_TWO_URL);
+    }
+    
+    public int getNumberOfItemsInCart() {
+        return driver.findElements(cartItems).size();
     }
     
     public void clickFinish() {
@@ -32,26 +38,27 @@ public class CheckoutStepTwoPage extends BasePage {
         waitForElement(cancelButton).click();
     }
     
-    public double getItemTotal() {
+    public BigDecimal getItemTotal() {
         String totalText = waitForElement(itemTotal).getText();
-        return Double.parseDouble(totalText.replaceAll("[^0-9.]", ""));
+        return new BigDecimal(totalText.replaceAll("[^0-9.]", ""));
     }
     
-    public double getTaxAmount() {
+    public BigDecimal getTaxAmount() {
         String taxText = waitForElement(tax).getText();
-        return Double.parseDouble(taxText.replaceAll("[^0-9.]", ""));
+        return new BigDecimal(taxText.replaceAll("[^0-9.]", ""));
     }
     
-    public double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         String totalText = waitForElement(total).getText();
-        return Double.parseDouble(totalText.replaceAll("[^0-9.]", ""));
+        return new BigDecimal(totalText.replaceAll("[^0-9.]", ""));
     }
     
     public boolean verifyTotalCalculation() {
-        double itemTotal = getItemTotal();
-        double tax = getTaxAmount();
-        double expectedTotal = itemTotal + tax;
-        double actualTotal = getTotalAmount();
-        return Math.abs(expectedTotal - actualTotal) < 0.01; // Using delta for double comparison
+        BigDecimal itemTotal = getItemTotal();
+        BigDecimal tax = getTaxAmount();
+        BigDecimal expectedTotal = itemTotal.add(tax);
+        BigDecimal actualTotal = getTotalAmount();
+        
+        return expectedTotal.compareTo(actualTotal) == 0;
     }
 }
