@@ -40,7 +40,3 @@ Thumbs.db
 *.png
 geckodriver.log
 chromedriver.log 
-
-TRASH BIN/
-*.html
-*.txt
